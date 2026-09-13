@@ -8,6 +8,22 @@ DATABASE = "expenses.db"
 
 def create_database():
 
+
+    connection = sqlite3.connect(DATABASE)
+
+    # your expenses table code
+
+    # your income table code
+
+    connection.commit()
+    connection.close()
+
+
+create_database()
+
+
+@app.route("/")
+def home():
     connection = sqlite3.connect(DATABASE)
 
     connection.execute("""
