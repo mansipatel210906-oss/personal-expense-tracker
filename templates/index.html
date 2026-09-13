@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Expense Tracker Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <div>
+            <h1>💰 Expense Tracker</h1>
+            <p>Manage your money easily</p>
+        </div>
+
+        <div class="buttons">
+
+            <a href="/add" class="add-button">
+                + Expense
+            </a>
+
+            <a href="/income" class="income-button">
+                + Income
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- SUMMARY CARDS -->
+
+    <div class="summary">
+
+        <div class="card">
+
+            <h3>Total Income</h3>
+
+            <p>₹ {{ "%.2f"|format(income) }}</p>
+
+        </div>
+
+
+        <div class="card expense-card">
+
+            <h3>Total Expenses</h3>
+
+            <p>₹ {{ "%.2f"|format(expenses_total) }}</p>
+
+        </div>
+
+
+        <div class="card balance-card">
+
+            <h3>Balance</h3>
+
+            <p>₹ {{ "%.2f"|format(balance) }}</p>
+
+        </div>
+
+    </div>
+
+
+    <!-- EXPENSE TABLE -->
+
+    <div class="section">
+
+        <h2>Recent Expenses</h2>
+
+        {% if expenses %}
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Title</th>
+                        <th>Amount</th>
+                        <th>Category</th>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for expense in expenses %}
+
+                    <tr>
+
+                        <td>
+                            {{ expense["title"] }}
+                        </td>
+
+                        <td class="amount">
+                            ₹ {{ "%.2f"|format(expense["amount"]) }}
+                        </td>
+
+                        <td>
+                            <span class="category">
+                                {{ expense["category"] }}
+                            </span>
+                        </td>
+
+                        <td>
+                            {{ expense["date"] }}
+                        </td>
+
+                        <td>
+                            {{ expense["description"] }}
+                        </td>
+
+                        <td>
+
+                            <a
+                                href="/delete/{{ expense['id'] }}"
+                                class="delete-button"
+                                onclick="return confirm('Delete this expense?')"
+                            >
+                                Delete
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <div class="no-data">
+
+            <h3>No expenses yet</h3>
+
+            <p>Add your first expense to start tracking.</p>
+
+            <a href="/add" class="add-button">
+                + Add Expense
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

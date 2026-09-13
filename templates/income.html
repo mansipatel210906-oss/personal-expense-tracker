@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Add Income</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>💰 Add Income</h1>
+
+    <form action="/income" method="POST">
+
+        <label>Income Title</label>
+
+        <input
+            type="text"
+            name="title"
+            placeholder="Example: Salary"
+            required
+        >
+
+        <label>Amount</label>
+
+        <input
+            type="number"
+            name="amount"
+            placeholder="Example: 30000"
+            step="0.01"
+            min="0"
+            required
+        >
+
+        <label>Date</label>
+
+        <input
+            type="date"
+            name="date"
+            required
+        >
+
+        <label>Description</label>
+
+        <textarea
+            name="description"
+            placeholder="Enter description">
+        </textarea>
+
+        <button type="submit">
+            Save Income
+        </button>
+
+    </form>
+
+    <a href="/" class="back-button">
+        ← Back to Dashboard
+    </a>
+
+</div>
+
+</body>
+
+</html>
