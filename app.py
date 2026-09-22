@@ -37,6 +37,8 @@ def create_database():
     connection.close()
 
 create_database()
+
+
 @app.route("/")
 def home():
 
